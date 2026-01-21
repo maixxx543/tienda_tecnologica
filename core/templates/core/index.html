@@ -1,16 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="principal.css">
+    <link rel="stylesheet" href="{% static 'core/css/principal.css' %}">
     <title>Tech Market</title>
 </head>
 <body>
     <header>
             <nav class="menu">               
                 <ul>
-                    <li><a href="catalogo.html" > Productos </a></li>
+                    <li><a href="{% url 'catalogo' %}" > Productos </a></li>
                     <li><a href="formulario inicio.html" > Registro </a></li>
                 </ul>
             </nav>
@@ -36,7 +37,7 @@
             </div>
         
         </div>
-        <img src="imagenes/imagen_en_el_head-removebg-preview.png" alt="imagen tecnololica">
+        <img src="{% static 'core/img/imagen_en_el_head-removebg-preview.png' %}" alt="imagen tecnololica">
 
     </main>
     
