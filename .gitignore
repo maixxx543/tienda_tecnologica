@@ -1,0 +1,24 @@
+# python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+
+# entorno virtual
+venv/
+env/
+
+# Configuracion de editores
+.idea/
+.vscode/
+
+# archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Bases de datos embebidas
+*.sqlite3
+*.db
+.env
