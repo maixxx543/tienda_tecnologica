@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'core/css/catalogo.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/arreglo.css' %}">
     <title>Tech Market</title>
     
 </head>
@@ -18,10 +18,10 @@
     <header>
         <input type="checkbox" id="menu"/>
         <label for="menu">
-            <img src="imagenes/menu.png" class="menu-icono" alt="menu">
+            <img src="{% static 'core/img/menu.png' %}" class="menu-icono" alt="menu">
         </label>
         <section class="menu-catalogo">
-            <nav class="volver-inicio"><a href="principal.html">volver</a></nav>
+            <nav class="volver-inicio"><a href="{% url 'index' %}">volver</a></nav>
             <ul>
                 <li><a href="#Telefonos" > Telefonos </a></li>
                 <li><a href="#Laptops" > Laptos </a></li>
@@ -47,7 +47,7 @@
                 <div class="producto">
                     <div class="caja">
                         <div class="imagen_producto">
-                            <img src="imagenes/telefonos/redmi-removebg-preview.png" alt="imagen de celular1" class="c1">
+                            <img src="{% static 'core/img/telefonos/redmi.png' %}" alt="imagen de celular1" class="c1">
                         </div>
                         <div class="especificaciones">
                             <h3>Redmi Note 14</h3>
@@ -64,7 +64,7 @@
                 <div class="producto">
                     <div class="caja">
                         <div class="imagen_producto">
-                            <img src="imagenes/telefonos/honor_magic7_pro-removebg-preview.png" alt="imagen de celular2" class="c2">
+                            <img src="{% static 'core/img/telefonos/honor_magic7_pro.png' %}" alt="imagen de celular2" class="c2">
                         </div>
                         <div class="especificaciones">
                             <h3>honor magic7 pro</h3>
@@ -80,7 +80,7 @@
                 <div class="producto">  
                     <div class="caja">
                         <div class="imagen_producto">
-                            <img src="imagenes/telefonos/tecno spark 20 pro.jpg" alt="imagen de celular3">
+                            <img src="{% static 'core/img/telefonos/tecno spark 20 pro.jpg' %}" alt="imagen de celular3">
                         </div>
                         <div class="especificaciones">
                             <h3>Techno Spark 20 Pro</h3>
@@ -95,7 +95,7 @@
                 <div class="producto">   
                     <div class="caja">
                         <div class="imagen_producto">
-                            <img src="imagenes/telefonos/samsung galaxi s25 ultra.jpg" alt="imagen de celular4">
+                            <img src="{% static 'core/img/telefonos/samsung galaxi s25 ultra.jpg' %}" alt="imagen de celular4">
                         </div>
                         <div class="especificaciones">
                             <h3>Samsung Galaxi s25 Ultra</h3>

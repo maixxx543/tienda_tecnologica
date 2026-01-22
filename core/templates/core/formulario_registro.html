@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,12 +13,12 @@
 
 <body>
     <header>
-        <nav><a href="principal.html">volver</a></nav>
+        <nav><a href="{% url 'index' %}">volver</a></nav>
     </header>
     <section class="main">
 
         <figure class="main__figure">
-            <img src="imagenes/formulario/registro.jpg" class="main__img">
+            <img src="{% static 'core/img/formulario/registro.jpg' %}" class="main__img">
         </figure>
 
         <div class="main__contact">
@@ -37,20 +38,20 @@
 
             </form>
             <p>¿ya estas registrado?</p>
-            <p class="main__paragraph"><a href="formulario inicio.html">inicia sesion</a></p>
+            <p class="main__paragraph"><a href="{% url 'formulario_inicio_sesion' %}">inicia sesion</a></p>
 
             <article class="main__social">
 
                 <a href="#" class="main__link">
-                    <img src="imagenes/formulario/cromo.png" class="main__icon">
+                    <img src="{% static 'core/img/formulario/cromo.png' %}" class="main__icon">
                 </a>
 
                 <a href="#" class="main__link">
-                    <img src="imagenes/formulario/logotipo-de-apple.png" class="main__icon">
+                    <img src="{% static 'core/img/formulario/logotipo-de-apple.png' %}" class="main__icon">
                 </a>
 
                 <a href="#" class="main__link">
-                    <img src="imagenes/formulario/panorama.png" class="main__icon">
+                    <img src="{% static 'core/img/formulario/panorama.png' %}" class="main__icon">
                 </a>
 
             </article>
