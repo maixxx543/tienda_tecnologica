@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block stiles %}
+    <link rel="stylesheet" href="{% static 'core/css/principal.css' %}"><link rel="stylesheet" href="{% static 'core/css/arreglo.css' %}">
+    {% endblock %}
+    <title>{% block title %}mi sitio web{% endblock %}</title>
+
+</head>
+<body>
+    <header>
+        {% block header %}
+            <nav class="menu">               
+                <ul>
+                    <li><a href="{% url 'catalogo' %}" > Productos </a></li>
+                    <li><a href="{% url 'formulario_registro' %}" > Registro </a></li>
+                </ul>
+            </nav>
+        {% endblock %}
+    </header>
+
+        {% block content %}
+        <main class="cuerpo"></main>
+        {% endblock %}
+
+
+    <footer>
+        <div class="footer-column">
+            <h2>Contactanos</h2>
+            <ul>
+                <li>Email:contacto@techmarket.com</li>
+                <li>Telefono: 0426 834 765</li>
+                <li>Direccion: calle principal n23</li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Enlaces</h3>
+            <ul>
+                <li><a href="#">sobre nosotros</a></li>
+                <li><a href="#">servicios</a></li>
+                <li><a href="#">contactos</a></li>
+            </ul>
+        </div>
+            <div class="footer-column">
+            <h3>Siguenos</h3>
+            <ul>
+                <li><a href="https://facebook.com" target="_blank">facebook</a></li>
+                <li><a href="https://twitter.com" target="_blank">twitter</a></li>
+                <li><a href="https://instagram.com" target="_blank">instagram</a></li>
+                
+            </ul>
+        </div>
+    </footer>
