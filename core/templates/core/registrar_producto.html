@@ -1,0 +1,58 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block stiles %}
+<link rel="stylesheet" href="{% static 'core/css/gestion_producto.css' %}">
+{% endblock %}
+
+{% block title %}Agregar Producto - Tech Market{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+{% block content %}
+<section class="main">
+    <figure class="main__figure">
+        <img src="" class="main__img" alt="Nuevo Producto">
+    </figure>
+
+    <div class="main__contact">
+        <h2 class="main__title">Nuevo Producto</h2>
+        <p class="main__paragraph">Ingresa los datos del equipo al inventario</p>
+
+        <form class="main__form" method="POST" enctype="multipart/form-data" action="{% url 'product_create' %}">
+            {% csrf_token %}
+            
+            <input type="text" name="name" placeholder="Nombre del producto" class="main__input" required>
+            
+            <div class="form-group-row">
+                <input type="number" name="price" placeholder="Precio ($)" class="main__input" step="0.01" required>
+                <input type="number" name="stock" placeholder="Stock inicial" class="main__input" required>
+            </div>
+
+            <select id="category" name="category" class="main__input" required>
+                <option value="" disabled selected >-- Seleccione Categoría --</option>
+                {% for category_obj in categories %}
+                    <option value="{{ category_obj.id }}" {% if category_obj.id == category_id|add:"0" %}
+                    selected{% endif %}>{{ category_obj.name_category }}</option>
+                {% endfor %}
+            </select>
+
+            <textarea name="description" placeholder="Descripción detallada (máx 300 caracteres)" class="main__input main__input--textarea" maxlength="300"></textarea>
+
+            <div class="file-input-container">
+                <label for="image" class="file-label">Subir Imagen del Producto</label>
+                <input type="file" id="image" name="image" class="main__input main__input--file" accept="image/*">
+            </div>
+
+            <label class="checkbox-container">
+                <input type="checkbox" name="replacement"> ¿Es un repuesto?
+            </label>
+
+            <input type="submit" value="Registrar Producto" class="main__input main__input--send">
+        </form>
+
+        <p class="main__paragraph"><a href="{% url 'catalogo' %}">Volver al catálogo</a></p>
+    </div>
+</section>
+{% endblock %}

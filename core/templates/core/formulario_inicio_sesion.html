@@ -26,7 +26,8 @@
             <h2 class="main__title">¡Hola de nuevo!</h2>
             <p class="main__paragraph">¡Bienvenido cuanto tiempo!</p>
 
-            <form class="main__form">
+            <form class="main__form" action="{% url 'formulario_inicio_sesion' %}">
+                {% csrf_token %}
 
                 <input type="text" placeholder="ingrese nombre de usuario" class="main__input">
 

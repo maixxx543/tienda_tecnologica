@@ -1,5 +1,10 @@
 {% extends "core/base.html" %}
 {% load static %}
+    {% block stiles %}
+    <link rel="stylesheet" href="{% static 'core/css/arreglo.css' %}">
+    {% endblock %}
+
+
 {% block title %}catalogo{% endblock %}
 
     
@@ -24,15 +29,29 @@
     {% endblock %}
     <!--cuerpo del body-->
 {% block content %}
-    <main class="seccion-productos">
+    <h1>Productos</h1>
+    <!--caja de telefonos-->
+    <h2><a id="Telefonos">Telefonos</a></h2>
 
-        <!--caja de productos-->
-        {% include 'core\includes\cart.html' %}
-
-    </main>
-{% endblock %}
+    <div class="seccion-telefonos">
+        {% if products %}
+        
+            {% for p in products %}
+                
+                <!--caja de productos-->
+                {% include 'core\includes\card.html' %}
+            {% endfor %}
+        {% else %}
+            <p>No hay productos</p>
+        {% endif %}
+    </div>
+    <div class="crear_producto">
+        <a href="{% url 'product_create' %}" id="crear_producto">crear productos</a>
+    </div>
 
     <a href="#" id="btn-arriba">↑</a>
+
+{% endblock %}
 
 </body>
 </html>

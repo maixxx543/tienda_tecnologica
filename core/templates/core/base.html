@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block stiles %}
-    <link rel="stylesheet" href="{% static 'core/css/principal.css' %}"><link rel="stylesheet" href="{% static 'core/css/arreglo.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/principal.css' %}">
     {% endblock %}
     <title>{% block title %}mi sitio web{% endblock %}</title>
 
@@ -23,14 +23,16 @@
         {% endblock %}
     </header>
 
-        {% block content %}
-        <main class="cuerpo"></main>
-        {% endblock %}
+    <main class="cuerpo">
+            {% block content %}
+
+            {% endblock %}
+    </main>
 
 
     <footer>
         <div class="footer-column">
-            <h2>Contactanos</h2>
+            <h3>Contactanos</h3>
             <ul>
                 <li>Email:contacto@techmarket.com</li>
                 <li>Telefono: 0426 834 765</li>

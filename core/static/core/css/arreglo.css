@@ -5,9 +5,30 @@ body, html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.crear_producto {
+    margin-top: 20px;
+    background-color: rgb(39, 39, 39);
+    width: 120px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+}
+#crear_producto {
+    text-decoration: none;
+    color: darkgray;
+    border: 10px;
+    border-color: black;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#crear_producto:hover {
+    color: white;
+}
+
+
 header {
     padding: 20px;
-    width: 100%;
     background-color: rgb(39, 39, 39);
     display: flex;
     gap: 20%;
@@ -96,10 +117,12 @@ h2 a {
 }
 
 .seccion-telefonos, .seccion-laptos, .seccion-repuestos {
-    margin: 0px 50px;
-    display:inline-block;
-    justify-content: center;
+    margin:0px;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
     width: 100%;
+    place-items: center;
     
 }
 
@@ -108,25 +131,29 @@ h2 a {
     border-radius: 10px;
     border-color: black;
     border-style:groove;
-    margin: 20px 0px 0px 50px;
-    width: 400PX;
+    margin: 0;
+    width: 500px;
     background-color: white;
+    box-sizing:border-box;
 }
 
 .caja {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     width: 100%;
 }
 
 .imagen_producto {
-    margin: 10px 0px;
-    padding: 10px 2px;
+    margin: 20px 0px;
+    padding: 0px;
+    text-align: center;
+
 }
 
 .imagen_producto img {
     padding: 10px;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     justify-content: center;
     object-fit: cover;
 }
@@ -155,6 +182,14 @@ h2 a {
     width: 100%;
 }
 
+.especificaciones .detalles a {
+    background-color: darkgrey;
+    color: black;
+}
+
+.especificaciones .detalles a:hover {
+    color: blue;
+}
 .especificaciones a:hover {
     color: white;
 }
@@ -165,8 +200,8 @@ footer {
     color: aliceblue;
     text-align: center;
     background-color:rgb(39, 39, 39);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .footer-column {
@@ -280,6 +315,8 @@ header label img {
 
     .seccion-telefonos {
         margin-left: 0px;
+        text-align: center;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .seccion-laptos {
@@ -294,8 +331,8 @@ header label img {
     border-radius: 10px;
     border-color: black;
     border-style:groove;
-    margin: 20px 0px 0px 0px;
-    width: 200px;
+    margin: 20px 0px 5px 0px;
+    width: 80%;
     background-color: white;
     }
 
@@ -311,20 +348,17 @@ header label img {
 
     .imagen_producto img {
         padding: 10px;
-        width: 100px;
-        height: 100px;
         object-fit: cover;
     }
 
     .caja .especificaciones{
-        width: 200px;
-        height: 150px;
+        width: 100%;
     }
 
     .especificaciones h3 {
-        font-size: 90%;
+        font-size: 100%;
     }
-
+    
     footer {
         display: flex;
         flex-direction: column;
@@ -333,6 +367,21 @@ header label img {
 
 }
 
+@media (max-width:700px){
+    .seccion-telefonos {
+        margin-left: 0px;
+        text-align: center;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .seccion-laptos {
+        margin-left: 0px;
+    }
+
+    .seccion-repuestos {
+        margin-left: 0px;
+    }
+}
 
 html { scroll-behavior: smooth; }
 

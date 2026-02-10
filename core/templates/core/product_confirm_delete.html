@@ -1,0 +1,10 @@
+<section>
+    <h1>¿Estas seguro de que quieres eliminar "{{ produc.name }}"?</h1>
+    <p>Esta accion no se puede deshacer.</p>
+
+    <form method="post" action="{% url 'product_delete' id=product.id %}">
+        {% csrf_token %}
+        <button type="submit" class="button-delete">Eliminar</button>
+        <a href="{% url 'product_detail' id=product.id %}">Cancelar</a>
+    </form>
+</section>
