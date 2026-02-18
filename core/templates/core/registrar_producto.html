@@ -23,26 +23,41 @@
         <form class="main__form" method="POST" enctype="multipart/form-data" action="{% url 'product_create' %}">
             {% csrf_token %}
             
-            <input type="text" name="name" placeholder="Nombre del producto" class="main__input" required>
+            <input type="text" name="name" placeholder="Nombre del producto" class="main__input">
+            {% if errors.name %}
+                <p style="color: red; font-size: small;">{{errors.name}}</p>
+            {% endif %}
             
             <div class="form-group-row">
-                <input type="number" name="price" placeholder="Precio ($)" class="main__input" step="0.01" required>
-                <input type="number" name="stock" placeholder="Stock inicial" class="main__input" required>
+                <input type="text" name="price" placeholder="Precio ($)" class="main__input" step="0.01">
+                {% if errors.price %}
+                <p style="color: red; font-size: small;">{{errors.price}}</p>
+                {% endif %}
+                <input type="number" name="stock" placeholder="Stock inicial" class="main__input">
+                {% if errors.stock %}
+                <p style="color: red; font-size: small;">{{errors.stock}}</p>
+                {% endif %}
             </div>
 
-            <select id="category" name="category" class="main__input" required>
+            <select id="category" name="category" class="main__input">
                 <option value="" disabled selected >-- Seleccione Categoría --</option>
                 {% for category_obj in categories %}
                     <option value="{{ category_obj.id }}" {% if category_obj.id == category_id|add:"0" %}
                     selected{% endif %}>{{ category_obj.name_category }}</option>
                 {% endfor %}
             </select>
+            {% if errors.category %}
+                <p style="color: red; font-size: small;">{{errors.category}}</p>
+            {% endif %}
 
             <textarea name="description" placeholder="Descripción detallada (máx 300 caracteres)" class="main__input main__input--textarea" maxlength="300"></textarea>
 
             <div class="file-input-container">
                 <label for="image" class="file-label">Subir Imagen del Producto</label>
                 <input type="file" id="image" name="image" class="main__input main__input--file" accept="image/*">
+                {% if errors.image_file %}
+                <p style="color: red; font-size: small;">{{errors.image_file}}</p>
+                {% endif %}
             </div>
 
             <label class="checkbox-container">
@@ -52,7 +67,7 @@
             <input type="submit" value="Registrar Producto" class="main__input main__input--send">
         </form>
 
-        <p class="main__paragraph"><a href="{% url 'catalogo' %}">Volver al catálogo</a></p>
+        <p class="main__paragraph"><a href="{% url 'catalogo' category_id=1 %}">Volver al catálogo</a></p>
     </div>
 </section>
 {% endblock %}

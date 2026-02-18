@@ -20,9 +20,9 @@
         <section class="menu-catalogo">
             <nav class="volver-inicio"><a href="{% url 'index' %}">volver</a></nav>
             <ul>
-                <li><a href="#Telefonos" > Telefonos </a></li>
-                <li><a href="#Laptops" > Laptos </a></li>
-                <li><a href="#Repuestos" > Repuestos </a></li>
+                <li><a href="{% url 'catalogo' category_id=1 %}" > Laptops </a></li>
+                <li><a href="{% url 'catalogo' category_id=2 %}" > Telefonos </a></li>
+                <li><a href="{% url 'catalogo' category_id=3 %}" > Repuestos </a></li>
             </ul>
         </section>
 

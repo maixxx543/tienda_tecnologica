@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Category,Product
+from .models import *
 from django.views import View
 # Create your views here.
 def index(request):
@@ -32,6 +32,31 @@ class ProductCreateView(View):
         category = Category.objects.filter(id=category_id).first() if category_id else None
         image_file = request.FILES.get('image')
 
+        errors = {}
+
+        if not name:
+            errors['name'] = "El nombre es requerido"
+        if price:
+            numero = dir(price)
+            print(numero)
+            if not price.isdecimal():
+                errors['price'] = "El precio es debe ser decimal"
+        else:
+            errors['price'] = "El precio es requerido"
+        if not stock:
+            errors['stock'] = "El stock es requerido"
+        if not category:
+            errors['category'] = "La categoria es requerida"
+        if not image_file:
+            errors['image_file'] = "La imagen es requerida"
+        
+        if errors:
+            categories = Category.objects.all()
+            return render(request, self.template_name, {
+                'categories': categories,
+                'errors': errors,
+            })
+
         new_product = Product.objects.create(
             name=name,
             price=price,
@@ -42,13 +67,14 @@ class ProductCreateView(View):
             image=image_file
 
         )
-        return redirect('catalogo')
+        return redirect('catalogo', category_id=1)
+
 
 class ProductListView(View):
     template_name = 'core/catalogo.html'
 
-    def get(self, request, *args, **kwargs):
-        products = Product.objects.all()
+    def get(self, request, category_id, *args, **kwargs):
+        products = Product.objects.filter(category=category_id)
         return render(request, self.template_name, {'products': products})
 
 class ProductDetailView(View):
@@ -93,7 +119,7 @@ class ProductUpdateView(View):
         product.category=category
         
         product.save()
-        return redirect('catalogo')
+        return redirect('catalogo', category_id=1)
 
 class ProductDeleteView(View):
     template_name = "core/product_confirm_delete.html"
@@ -106,4 +132,68 @@ class ProductDeleteView(View):
         product = get_object_or_404(Product, id=id)
         product.delete()
 
+        return redirect('catalogo', category_id=1)
+
+
+class CartView(View):
+    template_name ='core/pedido.html'
+    
+    def get_context_data(self, request, *arg, **kwargs):
+
+        context = super.get_context_data(**kwargs)
+        cart = self.request.session.get('cart', {})
+        items= []
+        total = 0 
+        for pid,qty in cart.items():
+            product = get_object_or_404(Product, pk = pid)
+
+            subtotal = product.price*qty
+            total += subtotal
+
+            items.append({
+                'product':product,
+                'quantity':qty,
+                'subtotal':subtotal,
+            })
+
+            context['items']= items
+            context['total']= total
+        return context
+
+
+class AddProduct(View):
+    def post(self, request, pk):
+        cart = request.session.get('cart', {})
+        product_id = str(pk)
+        if product_id in cart:
+            cart [product_id] += 1
+        else:
+            cart[product_id] = 1
+        request.sessions('cart') = cart
         return redirect('catalogo')
+    
+# class CheckoutView(View):
+#     def post(self, request):
+#         cart = request.session.get('cart', {})
+#         if not cart:
+#             return redirect('catalogo')
+        
+#         order = Order.objects.create(
+#             user=request.user,
+#             status='pending',
+#             payment_amount=0
+#         )
+#         total_final = 0
+
+#         cart.items():
+#         product = Product.objects.get(pk = pid)
+
+#         OrderItem.objects.create(
+#             order=order,
+#             product=product,
+#             quantity=qty
+#         )
+#         total_final += (product.price * qty)
+#         order.payment_amount = total_final
+
+#         order.save
