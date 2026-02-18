@@ -12,7 +12,7 @@
                         <div class="especificaciones">
                             <h3>{{ p.name }}</h3>
                             <p>${{ p.price }}</p>
-                            <a href: {% url 'addproduct' %} class="agregar-carrito">
+                            <a href: {% url 'addproduct' pk=p.id %} class="agregar-carrito">
                             Agregar al carrito 
                             </a>
                             <div class="detalles">

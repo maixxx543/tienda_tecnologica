@@ -169,7 +169,7 @@ class AddProduct(View):
             cart [product_id] += 1
         else:
             cart[product_id] = 1
-        request.sessions('cart') = cart
+        request.sessions('cart') == cart
         return redirect('catalogo')
     
 # class CheckoutView(View):
