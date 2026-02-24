@@ -28,10 +28,10 @@
 
             <form class="main__form" action="{% url 'formulario_inicio_sesion' %}">
                 {% csrf_token %}
+                
+                {{ form.username }}
 
-                <input type="text" placeholder="ingrese nombre de usuario" class="main__input">
-
-                <input type="password" placeholder="contraseña" class="main__input">
+                {{ form.password }}
 
                 <input type="submit" value="iniciar secion" class="main__input main__input--send">
 

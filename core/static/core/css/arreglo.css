@@ -45,7 +45,9 @@ header .menu-catalogo {
     color: darkgrey;
     padding: 10px;
     border-radius: 10px;
+    position: relative;
 }
+
 
 header .volver-inicio a:hover {
     color: white;
@@ -59,26 +61,23 @@ header .menu-catalogo .volver-inicio {
 
 
 header .menu-catalogo ul {
-    justify-content: center;
-    gap: 100px;
     display: flex;
     width: 100%;
-    padding: 0;
-}
-
-.menu-catalogo ul li {
-    list-style: none;
-}
-
-.menu-catalogo ul li a {
-    text-decoration: none;
     color: darkgray;
-    font-size: 15px;
-    font-weight: 800;
-    padding: 5px;
-    border-radius: 10px;
+    align-items: center;
+    position: relative;
+    padding: 10px;
 }
 
+.menu-catalogo .titulo_producto {
+    list-style: none;
+    text-align: center;
+    font-weight: 1000;
+    width: 100%;
+    position: absolute;
+    font-size: 25px;
+    align-items: center;
+}
 
 .menu-catalogo a:hover {
     color: white;
@@ -86,6 +85,52 @@ header .menu-catalogo ul {
 
 }
 
+.search-form {
+    display: flex;
+    gap: 5px; /* Unimos los elementos */
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+    overflow: hidden; /* Para que los bordes redondeados afecten a los hijos */
+}
+
+.search-input {
+    flex: 2; /* El buscador ocupa más espacio */
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    border-right: none;
+    border-color: #8f8989;
+    outline: none;
+    font-size: 16px;
+}
+
+.main__input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-right: none;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    outline: none;
+    border-radius: 10px;
+    border-color: #8f8989;
+}
+
+.search-button {
+    padding: 12px 25px;
+    background-color: #007bff; /* Color azul, cámbialo a tu gusto */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
 
 main {
     padding: 20px 60px;
@@ -123,29 +168,34 @@ h2 a {
     gap: 20px;
     width: 100%;
     place-items: center;
+    padding: 10px;
     
 }
 
 .producto {
-    display: inline-block;
+    display: flex;
     border-radius: 10px;
-    border-color: black;
+    border: 2px solid black;
     border-style:groove;
-    margin: 0;
+    margin: 10px;
     width: 500px;
     background-color: white;
+    overflow: hidden;
     box-sizing:border-box;
 }
 
 .caja {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    align-items: center;
     width: 100%;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
 }
 
 .imagen_producto {
-    margin: 20px 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     text-align: center;
 
 }
@@ -180,6 +230,7 @@ h2 a {
     padding: 10px;
     color: darkgray;
     width: 100%;
+    cursor: pointer;
 }
 
 .especificaciones .detalles a {
@@ -250,40 +301,61 @@ header label img {
     display: none;
 }
 
+.titulo {
+    display: none;
+    font-weight: 900;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    font-family: Arial, sans-serif;
+}
+
+.step-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.page-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 1px solid #007bff;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.current-page {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.current-page strong {
+    color: #000;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+
 @media (max-width:800px) {
-
-    header label {
+    .titulo {
         display: initial;
+        margin: 20px;
     }
-
-    header label img {
-        display: initial;
-        cursor: pointer;
-    }
-
-
-    header .menu-catalogo {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        top: 7%;
-        left: 5%;
-        right: 0;
-        bottom: 65%;
-        background-color: darkgray;
-        width: 40%;
-        display: none;
-        border-radius: 5px;
-    }
-
-    .menu-catalogo .volver-inicio a {
-        padding: 10px;
-        flex-direction: column;
-        margin: 0px;
-        color: black;
-    }
-
     header .menu-catalogo ul {
         flex-direction: column;
         margin-top: 10px;
@@ -292,17 +364,14 @@ header label img {
 
     }
 
-    header .menu-catalogo ul li a {
-        color: black;
-    }
-
-    #menu:checked ~ .menu-catalogo {
-        display: initial;
+    .titulo_producto {
+        display: none;
     }
 
     main {
         padding: 10px;  
-        margin-bottom: 10px;  
+        margin-bottom: 10px;
+        text-align: center;  
     }
 }
 
@@ -367,7 +436,17 @@ header label img {
 
 }
 
-@media (max-width:700px){
+@media (max-width:600px){
+    .search-form {
+        flex-direction: column;
+        box-shadow: none;
+        gap: 10px;
+    }
+    .search-input, .search-select, .search-button {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+    }
     .seccion-telefonos {
         margin-left: 0px;
         text-align: center;

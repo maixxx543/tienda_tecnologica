@@ -13,25 +13,33 @@
 
     <!--encabezado del body-->
     {% block header %}
-        <input type="checkbox" id="menu"/>
-        <label for="menu">
-            <img src="{% static 'core/img/menu.png' %}" class="menu-icono" alt="menu">
-        </label>
         <section class="menu-catalogo">
             <nav class="volver-inicio"><a href="{% url 'index' %}">volver</a></nav>
             <ul>
-                <li><a href="{% url 'catalogo' category_id=1 %}" > Laptops </a></li>
-                <li><a href="{% url 'catalogo' category_id=2 %}" > Telefonos </a></li>
-                <li><a href="{% url 'catalogo' category_id=3 %}" > Repuestos </a></li>
+                <li class="titulo_producto"> Productos </li>
             </ul>
         </section>
 
     {% endblock %}
     <!--cuerpo del body-->
 {% block content %}
-    <h1>Productos</h1>
+        <h1 class="titulo">Productos</h1>
+    <form method="GET" action="{% url 'catalogo' %}" class="search-form">
+        <input type="text" name="q" placeholder="buscar productos..."
+        value="{{ query|default_if_none:'' }}" class="search-input">
+        <select id="category" name="category" class="main__input">
+                <option value="" disabled selected >-- Seleccione Categoría --</option>
+                {% for category_obj in categories %}
+                    <option value="{{ category_obj.id }}" {% if category_obj.id == category_id|add:"0" %}
+                    selected{% endif %}>{{ category_obj.name_category }}</option>
+                {% endfor %}
+        </select>
+        <button type="submit" class="search-button">Buscar</button>
+    </form>
     <!--caja de telefonos-->
-    <h2><a id="Telefonos">Telefonos</a></h2>
+    {% if category %}
+    <h2><a id="Telefonos">{{ category.name_category }}</a></h2>
+    {% endif %}
 
     <div class="seccion-telefonos">
         {% if products %}
@@ -51,6 +59,24 @@
 
     <a href="#" id="btn-arriba">↑</a>
 
+    <div class="pagination-container">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }} 
+                {% if query %}&q={{ query }}{% endif %}" class="page-link">anterior</a>
+            {% endif %}
+
+            <span class="current-page">
+                Página{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}
+                {% if query %}&q={{ query }}{% endif %}" class="page-link">siguiente</a>
+            {% endif %}
+        </span>
+
+    </div>
 {% endblock %}
 
 </body>

@@ -12,7 +12,7 @@ class Command(BaseCommand):
         {'name_category': "Laptop", 'description': "De ultima generacion"}
     ]
         for category in categories:
-            category , created = Category.objects.update_or_create(defaults=category, name_category=category['name_category'], description=category['description'])
+            category , created = Category.objects.get_or_create(defaults=category, name_category=category['name_category'], description=category['description'])
 
             if created:
                 self.stdout.write(self.style.SUCCESS(f'Categoria: "{category.name_category}" creado.' ))

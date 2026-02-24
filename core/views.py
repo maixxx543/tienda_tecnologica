@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.views import View
+from django.core.paginator import Paginator
+from django.db.models import Q
+from .forms import LoginForm
 # Create your views here.
 def index(request):
     return render(request, 'core/index.html')
@@ -10,9 +13,6 @@ def catalogo(request):
 
 def formulario_registro(request):
     return render(request, 'core/formulario_registro.html')
-
-def formulario_inicio_sesion(request):
-    return render(request, 'core/formulario_inicio_sesion.html')
 
 
 class ProductCreateView(View):
@@ -51,6 +51,7 @@ class ProductCreateView(View):
             errors['image_file'] = "La imagen es requerida"
         
         if errors:
+
             categories = Category.objects.all()
             return render(request, self.template_name, {
                 'categories': categories,
@@ -67,15 +68,46 @@ class ProductCreateView(View):
             image=image_file
 
         )
-        return redirect('catalogo', category_id=1)
+        return redirect('catalogo')
 
 
 class ProductListView(View):
     template_name = 'core/catalogo.html'
+    paginate_by = 6
 
-    def get(self, request, category_id, *args, **kwargs):
-        products = Product.objects.filter(category=category_id)
-        return render(request, self.template_name, {'products': products})
+    def get(self, request, *args, **kwargs):
+        products = Product.objects.all()
+        query = request.GET.get('q')
+        category = request.GET.get('category')
+
+        if query:
+            products = products.filter(
+                Q(name__icontains=query) |
+                Q(description__icontains=query)
+            ).distinct()
+
+        if category:
+            products = products.filter(
+                Q(category__id__icontains=category)
+            ).distinct()
+
+        paginator = Paginator(products, self.paginate_by)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context = {
+            'page_obj': page_obj,
+            'products': page_obj.object_list,
+            'query': query,
+            'categories': Category.objects.all(),
+            'category': Category.objects.filter(id=category).first() if category else None
+        }
+
+        return render(request, self.template_name, context)
+
+
+    
 
 class ProductDetailView(View):
     template_name = 'core/product_detail.html'
@@ -119,7 +151,7 @@ class ProductUpdateView(View):
         product.category=category
         
         product.save()
-        return redirect('catalogo', category_id=1)
+        return redirect('catalogo')
 
 class ProductDeleteView(View):
     template_name = "core/product_confirm_delete.html"
@@ -132,7 +164,7 @@ class ProductDeleteView(View):
         product = get_object_or_404(Product, id=id)
         product.delete()
 
-        return redirect('catalogo', category_id=1)
+        return redirect('catalogo')
 
 
 class CartView(View):
@@ -159,6 +191,14 @@ class CartView(View):
             context['items']= items
             context['total']= total
         return context
+    
+class UserLoginView(View):
+    template_name = 'core/formulario_inicio_sesion.html'
+
+    def get(self, request, *args, **kwargs):
+
+        form = LoginForm()
+        return render(request, self.template_name,{'form': form})
 
 
 class AddProduct(View):
