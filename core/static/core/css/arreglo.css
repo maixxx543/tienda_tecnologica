@@ -6,16 +6,42 @@ body, html {
 }
 
 .crear_producto {
-    margin-top: 20px;
-    background-color: rgb(39, 39, 39);
+    background-color: rgb(250, 250, 250);
     width: 120px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 5px;
+    /* Añadimos una transición para que el efecto sea suave */
+    transition: box-shadow 0.3s ease;
 }
+
+
+/* Centra específicamente el título del carrito */
+#titulo_carrito {
+    text-align: center;
+    width: 100%;       /* Asegura que ocupe todo el ancho para poder centrar el texto */
+    margin: 20px 0;    /* Ajusta el margen a tu gusto */
+    display: block;    /* Lo trata como bloque independiente */
+}
+
+/* Ajuste del contenedor para que no bloquee el centrado */
+.cart-header {
+    margin-left: 30px;
+    display: flex;
+    justify-content: center; /* Centra el contenido si usas flex */
+    width: 90%;
+    background-color: black;
+    color: white; /* Evita heredar el fondo oscuro si no lo deseas */
+}
+
+.crear_producto:hover {
+    /* x y blur color */
+    box-shadow: 0px 0px 10px #8f8989;
+}
+
 #crear_producto {
     text-decoration: none;
-    color: darkgray;
+    color: rgb(47, 46, 46);
     border: 10px;
     border-color: black;
     margin-top: 10px;
@@ -23,7 +49,7 @@ body, html {
 }
 
 #crear_producto:hover {
-    color: white;
+    color:royalblue;
 }
 
 
@@ -38,6 +64,7 @@ header .menu-catalogo {
     width: 100%;
 }
 
+
 .menu-catalogo .volver-inicio a {
     font-size: 20px;
     font-weight: 800;
@@ -50,6 +77,11 @@ header .menu-catalogo {
 
 
 header .volver-inicio a:hover {
+    color: white;
+    background: linear-gradient(to right, #8f8989,rgb(41, 41, 70))
+}
+
+header #crear_producto a:hover {
     color: white;
     background: linear-gradient(to right, #8f8989,rgb(41, 41, 70))
 }
@@ -79,11 +111,6 @@ header .menu-catalogo ul {
     align-items: center;
 }
 
-.menu-catalogo a:hover {
-    color: white;
-    background: linear-gradient(to right, #8f8989,rgb(41, 41, 70))
-
-}
 
 .search-form {
     display: flex;
@@ -155,7 +182,7 @@ h2 {
 
 
 h2 a {
-    background-color: rgb(39, 39, 39);
+    background-color: rgb(206, 192, 192);
     border-radius: 10px;
     color: white;
     padding: 10px;
@@ -201,7 +228,7 @@ h2 a {
 }
 
 .imagen_producto img {
-    padding: 10px;
+    padding: 0;
     width: 200px;
     height: 200px;
     justify-content: center;
@@ -209,7 +236,7 @@ h2 a {
 }
 
 .caja .especificaciones {
-    padding: 20px 0px 20px;
+    padding: 25px;
     background-color: darkgray;
     border-radius: 5px;
     width: 100%;
@@ -351,6 +378,29 @@ header label img {
 }
 
 
+#lista {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #000000; /* Azul moderno */
+    color: white;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+#lista:hover {
+    background-color: #1d4ed8; /* Un azul más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+#lista:active {
+    transform: translateY(0); /* Vuelve a su sitio al hacer clic */
+}
+
 @media (max-width:800px) {
     .titulo {
         display: initial;
@@ -362,6 +412,10 @@ header label img {
         gap: 10px;
         padding: 10px;
 
+    }
+    
+    .seccion-telefonos {
+        width: auto;
     }
 
     .titulo_producto {
@@ -375,7 +429,7 @@ header label img {
     }
 }
 
-@media (max-width:1100px) {
+@media (max-width:1150px) {
 
     .seccion-productos {
         margin: 0px 10px 0px 10px;
@@ -436,6 +490,27 @@ header label img {
 
 }
 
+.agregar-carrito {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 15px 30px;
+    background-color: #000000; /* Azul moderno */
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50px; /* Bordes muy redondeados */
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.agregar-carrito:hover {
+    background-color: #444242;
+    transform: translateY(-3px); /* Pequeño salto hacia arriba */
+    box-shadow: 0 6px 20px rgba(63, 63, 63, 0.4);
+    cursor: pointer;
+}
+
 @media (max-width:600px){
     .search-form {
         flex-direction: column;
@@ -451,6 +526,7 @@ header label img {
         margin-left: 0px;
         text-align: center;
         grid-template-columns: repeat(1, 1fr);
+        width:auto;
     }
 
     .seccion-laptos {
@@ -512,5 +588,329 @@ body::after {
     @keyframes aparecer {
         from { opacity: 0; transform: scale(0) translateY(50px); }
         to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+}
+
+
+
+
+.modal-overlay {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(10px); /* BORROSO */
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.modal-overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background: darkgray;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 400px;
+    color: black; /* Para que el texto sea legible */
+}
+
+/* Contenedor de los botones para alinearlos */
+.modal-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espacio entre los botones */
+}
+
+/* Estilo general para ambos botones */
+.button-delete, .button-cancel {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none; /* Quita el subrayado al link de cancelar */
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-block;
+}
+
+/* BOTÓN ELIMINAR (Acción destructiva) */
+.button-delete {
+    background-color: #ff4d4d; /* Rojo vibrante */
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+}
+
+.button-delete:hover {
+    background-color: #e60000; /* Rojo más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Pequeño salto hacia arriba */
+    box-shadow: 0 6px 20px rgba(255, 77, 77, 0.5);
+}
+
+/* BOTÓN CANCELAR (Acción neutral) */
+.button-cancel {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.button-cancel:hover {
+    background-color: #e0e0e0;
+    color: #222;
+    transform: translateY(-2px);
+}
+
+/* Efecto al presionar (click) */
+.button-delete:active, .button-cancel:active {
+    transform: translateY(0);
+}
+
+
+
+
+
+/* Contenedor Principal */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.section {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.titulo a:hover {
+    color: #0056b3;
+}
+
+/* Tabla Estilizada */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 15px;
+    border-bottom: 2px solid #dee2e6;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+.table tbody tr:hover {
+    background-color: #fcfcfc;
+}
+
+/* Imágenes de productos */
+.cart-img {
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease;
+}
+
+.cart-img:hover {
+    transform: scale(1.1);
+}
+
+/* Alertas */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border-left: 5px solid;
+}
+.alert-error { background: #fee2e2; border-color: #ef4444; color: #b91c1c; }
+.alert-success { background: #dcfce7; border-color: #22c55e; color: #15803d; }
+
+/* Botones */
+.btn-volver, .btn-vaciar, .btn-pagar, .btn-eliminar-simple {
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    font-size: 0.95rem;
+}
+
+.btn-volver {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+.btn-volver:hover { background-color: #e5e7eb; }
+
+.btn-vaciar {
+    background-color: #ff4757;
+    color: white;
+}
+.btn-vaciar:hover { background-color: #ff6b81; }
+
+.btn-pagar {
+    background-color: #2f3542;
+    color: #2ed573; /* Verde tecnológico */
+    border: 2px solid #2ed573;
+}
+.btn-pagar:hover {
+    background-color: #2ed573;
+    color: #2f3542;
+}
+
+.btn-eliminar-simple {
+    color: #ff4757;
+    background: none;
+    font-size: 0.85rem;
+}
+.btn-eliminar-simple:hover { text-decoration: underline; }
+
+/* Total */
+tfoot tr td {
+    font-size: 1.2rem;
+    padding-top: 20px !important;
+}
+
+.total-amount {
+    color: #2f3542;
+    font-size: 1.5rem;
+}
+
+/* --- RESPONSIVE PARA EL CARRITO --- */
+
+@media (max-width: 768px) {
+    /* Ajustes del contenedor principal */
+    .container {
+        margin: 10px;
+        padding: 15px;
+        width: auto;
+    }
+
+    #titulo_carrito {
+        font-size: 1.5rem;
+        margin: 15px 0;
+    }
+
+    /* Forzamos a la tabla a comportarse como bloques, no como celdas */
+    .table thead {
+        display: none; /* Escondemos los encabezados de la tabla */
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        padding: 10px;
+        position: relative;
+        background-color: #fff;
+    }
+
+    .table td {
+        text-align: right; /* Alineamos el contenido a la derecha */
+        padding-left: 50%; /* Dejamos espacio para el "título" a la izquierda */
+        position: relative;
+        border-bottom: 1px solid #f9f9f9;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    /* Creamos etiquetas para identificar qué es cada dato */
+    .table td::before {
+        content: attr(data-label); /* Usaremos este atributo en el HTML */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+    }
+
+    /* Casos especiales: Imagen y Producto */
+    .table td:nth-child(1), .table td:nth-child(2) {
+        text-align: center;
+        justify-content: center;
+        padding-left: 15px;
+    }
+    
+    .table td:nth-child(1)::before, .table td:nth-child(2)::before {
+        display: none; /* No mostrar etiqueta para nombre e imagen */
+    }
+
+    .cart-img {
+        width: 100px !important;
+        height: 100px !important;
+        margin: 10px 0;
+    }
+
+    /* Footer de la tabla (Total) */
+    .total-row td {
+        text-align: center;
+        padding-left: 15px;
+        font-size: 1.1rem;
+        justify-content: center;
+    }
+
+    /* Botones de acción inferiores */
+    .acciones-carrito {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .right-actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-volver, .btn-vaciar, .btn-pagar {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
     }
 }

@@ -13,7 +13,7 @@
 {% block content %}
 <section class="main">
     <figure class="main__figure">
-        <img src="" class="main__img" alt="Actualizar Producto">
+        <img src="{% static 'core/img/formulario/update.jpg' %}" class="main__img">
     </figure>
 
     <div class="main__contact">
@@ -58,7 +58,7 @@
             <input type="submit" value="Actualizar Producto" class="main__input main__input--send">
         </form>
 
-        <p class="main__paragraph"><a href="{% url 'catalogo' %}">Volver al catálogo</a></p>
+        <p class="main__paragraph"><a href="{% url 'catalogo' replacement=0 %}">Volver al catálogo</a></p>
     </div>
 </section>
 {% endblock %}

@@ -1,0 +1,120 @@
+{% extends "core/catalogo.html" %}
+{% load static %}
+
+{% block stiles %}
+    <link rel="stylesheet" href="{% static 'core/css/arreglo.css' %}">
+{% endblock %}
+
+{% block title %} Carrito de Compras | Tienda Tech {% endblock %}
+
+{% block header %}
+    <h1 id="titulo_carrito">🛒 Tu Carrito de Compras</h1>
+{% endblock %}
+
+{% block content %}
+<section class="container mt-4">
+
+
+
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Imagen</th>
+                    <th class="text-center">Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if products %}
+                    {% for p in products %}
+                        <tr>
+                            <td data-label="Producto">
+                                <span class="product-name-cell"><strong>{{ p.name }}</strong></span>
+                            </td>
+                            <td data-label="Imagen">
+                                {% if p.image %}
+                                    <img src="{{ p.image.url }}" alt="{{ p.name }}" class="cart-img" style="width: 65px; height: 65px; object-fit: cover;">
+                                {% else %}
+                                    <div class="no-image-placeholder">No disp.</div>
+                                {% endif %}
+                            </td>
+                            <td data-label="Cantidad" class="text-center">
+                                <span class="quantity-badge">{{ p.quantity }}</span>
+                            </td>
+                            <td data-label="Precio Unitario"><span class="currency-symbol">$</span>{{ p.price }}</td>
+                            <td data-label="Subtotal" class="subtotal-cell"><span class="currency-symbol">$</span>{{ p.subtotal }}</td>
+                            <td data-label="Acciones" class="text-center">
+                                <form method="POST" action="{% url 'cart_view' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{ p.id }}">
+                                    <button type="submit" name="action" value="remove" class="btn-eliminar-simple">
+                                        <span class="icon">✕</span> Quitar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="empty-cart-message">
+                            <p>Tu carrito está vacío actualmente.</p>
+                            <a href="{% url 'catalogo' replacement=0 %}" class="btn-volver">Ir a comprar algo</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+            
+            {% if products %}
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="4" class="text-right">Total a Pagar:</td>
+                    <td colspan="2" class="total-amount-cell">
+                        <strong class="total-amount">${{ total_cart_price }}</strong>
+                    </td>
+                </tr>
+            </tfoot>
+            {% endif %}
+        </table>
+    </div>
+
+    <div class="acciones-carrito">
+        <div class="left-actions">
+            <a href="{% url 'catalogo' replacement=0 %}" class="btn-volver">
+                ← Continuar Comprando
+            </a>
+        </div>
+        
+        {% if products %}
+            <div class="right-actions">
+                <form method="POST" action="{% url 'cart_view' %}" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" name="action" value="clear" class="btn-vaciar">
+                        🗑 Vaciar Carrito
+                    </button>
+                </form>
+
+                <form method="POST" action="{% url 'checkout' %}" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-pagar">
+                        Proceder al Pago 💳
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -2,44 +2,42 @@
 {% load static %}
 {% block stiles %}
 
-    <link rel="stylesheet" href="{% static 'core/css/arreglo.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/product_detail.css' %}">
     {% endblock %}
 
 
 {% block title %}producto{% endblock %}
 
-{% block content %}
 
-    {% block header %}
+        {% block header %}
         <nav class="menu">
+            <ul>
+                <li><a href="{% url 'catalogo' replacement=0 %}">volver</a></li>
+            </ul>
             
         </nav>
-    {% endblock %}
-                <div class="producto">
-                    <div class="caja">
-                        <div class="imagen_producto">
-                            {% if p.image %}
-                                <img src="{{ p.image.url}}" alt="image de {{p.name}}" class="c1">
-                            {% else %}
-                                <p>imagen no disponible</p>
-                            {% endif %}
-                        </div>
-                        <div class="especificaciones">
-                            <h3>{{ p.name }}</h3>
-                            <p>Precio: ${{ p.price }}</p>
-                            <p>stock: {{ p.stock }}</p>
-                            <p>descripcion: {{ p.description }}</p>
-                            <a href="#" class="agregar-carrito">
-                            Agregar al carrito 
-                            </a>
-                        </div>
-                        
-                    </div>
+        {% endblock %}
+
+    {% block content %}
+        <div class="producto">
+            <div class="caja">
+                <div class="imagen_producto">
+                    {% if p.image %}
+                        <img src="{{ p.image.url}}" alt="image de {{p.name}}" class="c1">
+                    {% else %}
+                        <p>imagen no disponible</p>
+                    {% endif %}
                 </div>
-                
-                        
+                <div class="especificaciones">
+                    <h3>{{ p.name }}</h3>
+                    <p>Precio: ${{ p.price }}</p>
+                    <p>stock: {{ p.stock }}</p>
+                    <p>descripcion: {{ p.description }}</p>
+                    <form action="{% url 'add_product' p.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="agregar-carrito">Añadir al carrito</button>
+                    </form>
+                </div>
             </div>
-            <p>
-                <a href="{% url 'catalogo' %}">volver a la lista de productos</a>
-            </p>
-{% endblock %}
+    {% endblock %}
+

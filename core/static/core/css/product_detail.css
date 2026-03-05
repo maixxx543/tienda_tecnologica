@@ -1,0 +1,204 @@
+body {
+    width: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+
+header {
+    width: 100%;
+    background-color: rgb(39, 39, 39);
+    margin: 0;
+    padding: 20px 0px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    width: 100%;
+    margin: 10px;
+}
+
+.menu ul li a {
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: none;
+    color: darkgrey;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.menu ul li a:hover {
+    color: white;
+    background: linear-gradient(to right, #8f8989,rgb(41, 41, 70))
+}
+
+/* contenedor del producto */
+
+.cuerpo {
+    width: 100%;
+}
+
+/* Contenedor principal para centrar la tarjeta */
+.producto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #f8f9fa; /* Un fondo gris muy suave */
+    min-height: 60vh;
+}
+
+/* La tarjeta blanca */
+.caja {
+    display: flex;
+    flex-wrap: wrap; /* Para que sea responsivo en móviles */
+    max-width: 900px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+}
+
+/* Sección de la imagen */
+.imagen_producto {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen_producto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+    transition: transform 0.5s ease;
+}
+
+.imagen_producto:hover img {
+    transform: scale(1.02); /* Zoom suave al pasar el mouse */
+}
+
+/* Sección de textos y detalles */
+.especificaciones {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.especificaciones h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.especificaciones p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+/* Estilo específico para el precio */
+.especificaciones p:nth-child(2) {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #27ae60; /* Color verde éxito */
+}
+
+/* El botón de agregar al carrito */
+.agregar-carrito {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 15px 30px;
+    background-color: #000000; /* Azul moderno */
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50px; /* Bordes muy redondeados */
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.agregar-carrito:hover {
+    background-color: #444242;
+    transform: translateY(-3px); /* Pequeño salto hacia arriba */
+    box-shadow: 0 6px 20px rgba(63, 63, 63, 0.4);
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .caja {
+        flex-direction: column;
+    }
+    
+    .especificaciones {
+        padding: 25px;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+footer {
+    padding: 0px 0px 60px 0px;
+    color: aliceblue;
+    text-align: center;
+    background-color:rgb(39, 39, 39);
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.footer-column h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    text-align: center;
+}
+ul {
+    padding: 0;
+}
+footer .footer-column ul li {
+    margin-top: 30px;
+    list-style: none;
+}
+
+ul li a {
+    color: darkgray;
+    text-decoration: none;
+}
+
+
+ul li a:hover {
+    color: white;
+}
+
+.footer-icons {
+    display: none;
+    gap: 10px;
+}

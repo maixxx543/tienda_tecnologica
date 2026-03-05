@@ -20,24 +20,28 @@
         <figure class="main__figure">
             <img src="{% static 'core/img/formulario/ini.jpg' %}" class="main__img">
         </figure>
-
+ 
         <div class="main__contact">
             
             <h2 class="main__title">¡Hola de nuevo!</h2>
             <p class="main__paragraph">¡Bienvenido cuanto tiempo!</p>
 
-            <form class="main__form" action="{% url 'formulario_inicio_sesion' %}">
+            <form method="post" action="{% url 'login' %}" class="main__form" >
                 {% csrf_token %}
                 
                 {{ form.username }}
 
                 {{ form.password }}
 
+                {%if error_message %}
+                    <p style="color: red;">{{ error_message }}</p>
+                {% endif %}
+
                 <input type="submit" value="iniciar secion" class="main__input main__input--send">
 
             </form>
             <p>¿no te has registrado?</p>
-            <p class="main__paragraph"><a href="{% url 'formulario_registro' %}">registrate</a></p>
+            <p class="main__paragraph"><a href="{% url 'register' %}">registrate</a></p>
 
             <article class="main__social">
 

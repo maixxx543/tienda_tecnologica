@@ -14,11 +14,30 @@
 <body>
     <header>
         {% block header %}
-            <nav class="menu">               
+            <input type="checkbox" id="menu"/>
+            <label for="menu" class="menu-icono">
+                <img src="{% static 'core\img\menu.png' %}" alt="menu">
+            </label>
+            <nav class="menu">
+                <div class="menu-spacer"></div> 
+
                 <ul>
-                    <li><a href="{% url 'catalogo' %}" > Productos </a></li>
-                    <li><a href="{% url 'formulario_registro' %}" > Registro </a></li>
+                    <li><a href="{% url 'catalogo'  replacement=0 %}">Productos</a></li>
+                    <li>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                        {% else %}
+                            <a href="{% url 'login' %}">Iniciar Sesión</a>
+                            <a href="{% url 'register' %}">Registrarse</a>
+                        {% endif %}
+                    </li>
                 </ul>
+
+                <div class="menu-user-container">
+                    {% if user.is_authenticated %}
+                        <p class="user">¡Hola {{user.username}}!</p>
+                    {% endif %}
+                </div>
             </nav>
         {% endblock %}
     </header>

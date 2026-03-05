@@ -19,6 +19,17 @@ header {
 
 .menu {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.menu-spacer, 
+.menu ul, 
+.menu-user-container {
+    flex: 1; 
 }
 
 ul {
@@ -27,15 +38,36 @@ ul {
 }
 
 ul li {
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 .menu ul {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 20px;
+    margin: 0;
+}
+
+.menu-user-container {
+    display: flex;
+    justify-content: end;
+}
+
+.user {
+    margin: 0;
+    font-weight: bold;
+    color: #3f3f70; /* O el color que prefieras */
+}
+
+#menu, .menu-icono {
+    display: none;
 }
 
 .menu ul li a {
+    white-space: nowrap;
     font-weight:800;
     text-decoration: none;
     color: darkgray;
@@ -144,6 +176,7 @@ footer {
 
 footer .footer-column ul li {
     margin-top: 30px;
+    justify-content: center;
 }
 ul li a {
     color: darkgray;
@@ -160,7 +193,7 @@ ul li a:hover {
     gap: 10px;
 }
 
-@media (max-width:800px) {
+@media (max-width:1000px) {
     header {
         justify-content: center;
     }
@@ -192,7 +225,69 @@ ul li a:hover {
     background: rgb(39, 39, 39);
     padding: 15px;
     border-radius: 5px;
-}
-    
+    }
 }
 
+@media (max-width:700px) {
+    .menu-icono {
+        display: block; /* Mostramos la imagen del menú */
+        cursor: pointer;
+        padding: 10px;
+        width: 40px; /* Ajusta según el tamaño de tu imagen */
+    }
+
+    .menu {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Ajusta según el alto de tu header */
+        left: 30%; /* Lo movemos al centro */
+        transform: translateX(-50%); /* Truco para centrar un absolute */
+        width: 80%; /* Que ocupe la mayor parte de la pantalla */
+        max-width: 300px;
+        background-color: #a6a6a6;
+        padding: 20px;
+        z-index: 1000;
+        border-radius: 8px;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Cuando el checkbox esté marcado, mostramos el menú */
+    #menu:checked ~ .menu {
+        display: flex;
+    }
+
+    .menu-spacer {
+        display: none; /* En móvil no necesitamos el espaciador */
+    }
+
+    .menu-user-container {
+        justify-content: center; /* Centramos el nombre de usuario en móvil */
+        margin-top: 15px;
+    }
+    
+    .menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .menu ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 1.2rem;
+        display: block;
+        padding: 5px 10px;
+    }
+
+    /* Efecto opcional: resaltar al pasar el mouse */
+    .menu ul li a:hover {
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 4px;
+    }
+}
